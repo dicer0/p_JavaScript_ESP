@@ -6,11 +6,11 @@ JavaScript es un lenguaje interpetado, orientado a objetos, débilmente tipado y
       directamente (usualmente es el navegador), sin necesidad de compilar el código para cada plataforma específica 
       de forma distinta, por lo cual es muy portable. 
       Algunos ejemplos de lenguajes interpretados populares incluyen Python, JavaScript, Ruby, PHP y Perl. 
-        - El motor V8 fue creado por Google para mejorar el rendimiento de la ejecución de JavaScript en el navegador 
-          web Google Chrome y en la ejecución de su framework Node.js, para ello el motor V8 primero interpreta el 
-          código para generar un código intermedio llamado bytecode y luego usa su motor de compilación JIT (Just-In-
-          Time Compilation) para compilar selectivamente partes del código en código máquina, lo que mejora 
-          significativamente la velocidad de ejecución.
+        - El motor V8 open source desarrollado en C++ por Google se diseñó para optimizar el rendimiento de JavaScript 
+          en el navegador web Google Chrome y para la ejecución de su framework Node.js. Su funcionamiento consta de 2 
+          etapas: Primero, interpreta el programa JavaScript para generar un código bytecode intermedio. Luego, emplea 
+          su motor JIT (compilación Just-In-Time) para compilar selectivamente partes del código a código máquina, lo 
+          que resulta en una ejecución más rápida y eficiente del programa.
     - Lenguajes de programación tipados: Son aquellos en los que se requiere especificar el tipo de dato de cada 
       variable antes de su uso o declaración.*/
 
@@ -310,8 +310,8 @@ var encontrarElementoEnArray = productos.find(function(elementoIndividual, indic
     return elementoIndividual.nombreProducto === "Laptop";
 });
 /*array.some(): Método que se utiliza para verificar si al menos un elemento en un arreglo cumple con cierta condición 
-especificada en una función de prueba. Devuelve true si al menos un elemento cumple con la condición, o false si ninguno 
-de los elementos la cumple.
+especificada en una función de prueba. Devuelve true si al menos un elemento cumple con la condición, o false si 
+ninguno de los elementos la cumple.
 var encontrarEnArray = arreglo.filter(funcion(elemento, indice, arreglo) {
   //Algoritmo de mutado o extracción...
   //elemento: El primer parámetro de la función se refiere al elemento del array que actualmente se esté procesado.
