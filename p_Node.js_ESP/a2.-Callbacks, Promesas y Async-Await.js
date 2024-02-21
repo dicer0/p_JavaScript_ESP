@@ -171,6 +171,7 @@ setTimeout(function(){
 
 
 
+//GESTIÓN DE EXCEPCIONES EN FUNCIONES ASÍNCRONAS:
 /*PROMESAS: Las promesas son una alternativa a los callbacks para gestionar funciones asíncronas en Node.js cuando 
 pueda existir un error durante su ejecución, ya que a diferencia de los callbacks, estas se basan en estados para 
 indicar si una tarea se ha completado o ha fallado porque ocurrió un error, para ello hacen uso de la instrucción 
@@ -178,4 +179,64 @@ return y de la clase Promise, que recibe un callback con dos parámetros:
     - resolve: Este parámetro del callback que recibe la promesa como parámetro se utiliza cuando la tarea ha sido 
       completada exitosamente sin excepciones (errores).
     - reject: Este parámetro del callback que recibe la promesa como parámetro se utiliza cuando la tarea ha sido 
-      rechazada porque ha ocurrido una excepción.*/
+      rechazada porque ha ocurrido una excepción.
+A continuación se utilizará una misma función que se realizó con callbacks pero ahora con promesas:*/
+function holaPromise(nombre, parametro_exito){                          //Función asíncrona con callback.
+    return new Promise(function(resolve, reject){
+        setTimeout(function(){                                          //Temporizador.
+            if(parametro_exito == true){                                //Condicional que avalúa si hubo errores.
+                console.log("\t\t\tHola\t" + nombre);                   //Tarea a ejecutar de la función.
+                resolve(nombre);                                        //resolve = Resultado de promesa sin errores.
+            } else{
+                console.log("\t\t\tHouston, empezamos con problemas...");//Tarea de la función si hubo excepciones.
+                reject(nombre);                                         //reject = Resultado de promesa con errores.
+            }
+        }, 1000);
+    });
+}
+function hablarPromise(nombre){
+    return new Promise(function(resolve, reject){
+        setTimeout(function(){                                          //Temporizador.
+            //El condicional que avalúa si hubo errores no debe existir en todas las promesas, solo donde sirva.
+            console.log("\t\t\tBla, bla, bla, bla...");                 //Tarea a ejecutar de la función.
+            resolve(nombre);                                            //resolve = Resultado de promesa sin errores.
+        }, 1000);
+    });
+}
+function adiosPromise(nombreHeredado, parametro_exitoHeredado){         //Función asíncrona con callback.
+    /*Para describir las acciones de las promesas se pueden utilizar arrow functions, que funcionan exactamente 
+    igual a las funciones normales, pero con una sintaxis más sencilla:
+    -Función normal:
+        function(){
+            //Contenido función.
+        }
+    -Arrow Function:
+        () => {
+            //Contenido función.
+        }
+    En las reglas ECMA6 esta es la sintaxis predeterminada para promesas.*/
+    return new Promise((resolve, reject) => {
+        setTimeout(function(){                                          //Temporizador.
+            console.log("\t\t\tAdiós\t" + nombreHeredado);              //Tarea a ejecutar de la función.
+            resolve(nombreHeredado);                                    //resolve = Resultado de promesa sin errores.
+        }, 1000);
+    });
+}
+/*Proceso hecho con promises para el manejo de excepciones, se usa un temporizador debido a la ejecución de los 
+ejemplos previos.*/
+setTimeout(function(){
+    console.log("\n\n\n------d.1.-Inicializando proceso con manejo de excepciones por medio de promesas------");
+    /*Cabe mencionar que los callbacks y promesas solo pueden devolver un único valor al resolverse o detectar una 
+    excepción. Sin embargo, se cuenta con la opción de crear un objeto que contenga múltiples valores como resultado 
+    de la promesa o callback, pero esto no siempre funciona.*/
+    holaPromise("di_cer0 = Diego Cervantes", true)  //Aquí se le pasa como parámetro a la función si hay errores o no.
+        .then(hablarPromise)
+        .then(hablarPromise)
+        .then(adiosPromise)
+        .then(function(){
+            console.log("------d.2.-Terminando proceso sin excepciones detectadas por medio de promesas--------");
+        })
+        .catch(function(){
+            console.error("--d.2.-Ocurrió un error en el proceso con manejo de excepciones por medio de promesas-");
+        });
+}, 17000);
