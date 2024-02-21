@@ -31,8 +31,8 @@ setInterval(function(){
 }, 1000);
 
 /*Pero no importando qué venga debajo de la función que falle, hasta que alguna función del monohilo tenga un error, 
-todo su contenido se ejecutará de forma asíncrona y primero se ejecutarán las instrucciones que menos tiempo les tome
-correrse.*/
+todo su contenido se ejecutará de forma asíncrona y primero se ejecutarán las instrucciones que menos tiempo les 
+tome correrse.*/
 console.log("Instrucción asíncrona ;)");
 
 
@@ -41,9 +41,9 @@ console.log("Instrucción asíncrona ;)");
 /*IMPORTACIÓN DE VARIABLES DE ENTORNO: Cuando se quiera utilizar una API u otro elemento externo que utilice un key, 
 un token, una contraseña, una variable o constante cuyo valor no deba cambiar, etc. por seguridad es de buenas 
 prácticas declararla en un archivo externo o simplemente que esta no se encuentre en el programa de forma explícita, 
-a esto se le llama variable de entorno y para crearla debemos acceder al proceso de node que estamos utilizando y luego 
-al entorno para finalmente asignar un valor, cabe mencionar que el nombre de las variables de entornos usualmente se pone 
-con maýusculas:
+a esto se le llama variable de entorno y para crearla debemos acceder al proceso de node que estamos utilizando y 
+luego al entorno para finalmente asignar un valor, cabe mencionar que el nombre de las variables de entornos 
+usualmente se pone con maýusculas:
 variable = process.env.NOMBRE_VARIABLE_DE_ENTORNO*/
 let variableDeEntorno1 = process.env.VARIABLE_DE_ENTORNO;
 let variableDeEntorno2 = process.env.VARIABLE_DE_ENTORNO_VALOR_PREVIO || "Olis por default";
