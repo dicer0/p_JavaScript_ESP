@@ -40,10 +40,10 @@ function soyAsincrona2(numfun2, miCallback2){
     setTimeout(function(){
         console.log("2.2.-Funcionalidad retrasada con setTimeout numero " + numfun2 + ".");
     }, 1000);
-    /*Función con el callback declarado en un lugar distinto al */
+    /*Función con el callback declarado fuera del temporizador, por eso se ejecuta de forma "asíncrona".*/
     miCallback2();
 }
-console.log("\n2.0.-Iniciando proceso asíncrono que no llama al callback....\n");
+console.log("\n2.0.-Iniciando proceso asíncrono que llama al callback fuera del temporizador....\n");
 soyAsincrona2(2, function(){
     console.log("2.3.-'Terminando' el proceso asíncrono donde se movió de lugar el callback fuera del temporizador.\n");
 });
@@ -54,14 +54,14 @@ function soyAsincrona3(numfun3, miCallback3, mensaje){
     console.log("3.1.-Hola, soy una funcionalidad asíncrona cualquiera numero " + numfun3 + " con dos parámetros. " + mensaje);
     setTimeout(function(){
         console.log("3.2.-Funcionalidad retrasada con setTimeout numero " + numfun3 + ".");
-        /*Función sin declarar el callback que recibe como parámetro
-        miCallback2();*/
+        /*Función sin declarar el callback que recibe como parámetro.
+        miCallback3();*/
     }, 1000);
 }
 console.log("\n3.0.-Iniciando proceso asíncrono que no llama al callback....\n");
 soyAsincrona3(3, function(){
     console.log("3.3.-Terminando proceso asíncrono... donde nunca se declaró el callback.\n");
-}, "Mensaje externo: Olis crayolis.");
+}, "Mensaje parámetro función asíncrona: Olis crayolis.");
 
 /*Ejemplo callbacks: Ahora crearemos una función con callback que llame a otra función con callback para así ordenar 
 correctamente el flujo de ejecución de un programa.*/
@@ -82,12 +82,12 @@ function adios(nombreHeredado, ultimoCallback){             //Última función a
 //Proceso correctamente ordenado con callbacks, se usa un temporizador debido a la ejecución del ejemplo previo.
 setTimeout(function(){
     console.log("\n\n\n------a.1.-Inicializando proceso correctamente ordenado con callbacks------")
-    hola("di_cer0", function(nombreRepetido){
+    hola("di_cer0", function(nombreHeredado){
         /*En esta parte en vez de pasar el mismo parámetro dos veces, cuando hay un valor que se pasa de una 
         función a otra, se puede declarar que el callback de la primera función (la de mayor jerarquía), recibe 
         un parámetro y este a su vez se pasa a la segunda función asíncrona.*/
         //adios("di_cer0", function(){
-        adios(nombreRepetido, function(){
+        adios(nombreHeredado, function(){
             console.log("------a.2.-Terminando proceso correctamente ordenado con callbacks---------")
         });
     });
@@ -171,4 +171,11 @@ setTimeout(function(){
 
 
 
-//PROMESAS
+/*PROMESAS: Las promesas son una alternativa a los callbacks para gestionar funciones asíncronas en Node.js cuando 
+pueda existir un error durante su ejecución, ya que a diferencia de los callbacks, estas se basan en estados para 
+indicar si una tarea se ha completado o ha fallado porque ocurrió un error, para ello hacen uso de la instrucción 
+return y de la clase Promise, que recibe un callback con dos parámetros:
+    - resolve: Este parámetro del callback que recibe la promesa como parámetro se utiliza cuando la tarea ha sido 
+      completada exitosamente sin excepciones (errores).
+    - reject: Este parámetro del callback que recibe la promesa como parámetro se utiliza cuando la tarea ha sido 
+      rechazada porque ha ocurrido una excepción.*/
