@@ -18,6 +18,31 @@ con un intervalo de tiempo de espera entre cada ejecución indicado en milisegun
 setInterval(function(){
     console.log("Sigo activo!!");
 }, 1000);
+
+/*Cuando queramos que una tarea se ejecute solo un cierto número de veces, podemos utilizar el método 
+clearInterval(), el cual debe ser aplicado a una variable que guarde el número de ejecuciones del método 
+setInterval().*/
+let ejecuciones = 0;
+let intervalo = setInterval(function(){
+    console.log("Olis crayolis " + ejecuciones);
+    if(ejecuciones === 3){
+        //clearInterval(): Método que detiene la ejecución de una función inicializada con el método setInterval.
+        clearInterval(intervalo);
+    }
+    ejecuciones++;
+}, 1000);
+
+/*setImmediate(): Mérodo que establece una acción a ser ejecutada tan pronto como sea posible, pero después de que 
+se haya completado el procesamiento del código actual.*/
+setImmediate(function(){
+    console.log("Ejecución inmediata antes de que ocurra un posible error.");
+    /*__dirname: Es una instrucción global (que no necesita ser importada) de Node.js que permite saber en que 
+    directorio se encuentra este programa actualmente.
+    __filename: Atributo global que indica el directorio, nombre y extensión del archivo actual.*/
+    console.log(__dirname);
+    console.log(__filename);
+})
+
 /*Uno de los problemas que se puede causar por ejemplo al utilizar el método setInterval es que si la función que 
 ejecuta falla, todo el programa se detiene, esto ocurre porque Node.js es monohilo.*/
 let i = 0;

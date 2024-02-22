@@ -204,8 +204,8 @@ function hablarPromise(nombre){                                         //Funci�
     });
 }
 function adiosPromise(nombreHeredado){                                  //Función asíncrona con manejo de errores.
-    /*Para describir las acciones de las promesas se pueden utilizar arrow functions, que funcionan exactamente 
-    igual a las funciones normales, pero con una sintaxis más sencilla:
+    /*Para describir las acciones de las promesas o callbacks se pueden utilizar arrow functions, que funcionan 
+    exactamente igual a las funciones normales, pero con una sintaxis más sencilla:
     -Función normal:
         function nombreFuncion(){
             //Contenido función.
@@ -214,7 +214,7 @@ function adiosPromise(nombreHeredado){                                  //Funci�
         () => {
             //Contenido función.
         }
-    En las reglas ECMA6 esta es la sintaxis predeterminada para promesas.*/
+    En las reglas ECMA6 esta es la sintaxis predeterminada para promesas y callbacks.*/
     return new Promise((resolve, reject) => {                           //Sintaxis de promesa.
         setTimeout(function(){                                          //Temporizador.
             console.log("\t\t\tAdiós\t" + nombreHeredado);              //Tarea a ejecutar de la función.

@@ -1,0 +1,3 @@
+Hola, yo soy di_cer0, un inventor mecatrónico en desarrollo.
+Quiero leer este archivo con el módulo File System de Node.js
+y tengo varias líneas de texto, uy si!!
