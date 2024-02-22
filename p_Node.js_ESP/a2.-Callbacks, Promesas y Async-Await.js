@@ -81,14 +81,14 @@ function adios(nombreHeredado, ultimoCallback){             //Última función a
 }
 //Proceso correctamente ordenado con callbacks, se usa un temporizador debido a la ejecución del ejemplo previo.
 setTimeout(function(){
-    console.log("\n\n\n------a.1.-Inicializando proceso correctamente ordenado con callbacks------")
+    console.log("\n\n\n------------a.1.-Inicializando proceso correctamente ordenado con callbacks-----------")
     hola("di_cer0", function(nombreHeredado){
         /*En esta parte en vez de pasar el mismo parámetro dos veces, cuando hay un valor que se pasa de una 
         función a otra, se puede declarar que el callback de la primera función (la de mayor jerarquía), recibe 
         un parámetro y este a su vez se pasa a la segunda función asíncrona.*/
         //adios("di_cer0", function(){
         adios(nombreHeredado, function(){
-            console.log("------a.2.-Terminando proceso correctamente ordenado con callbacks---------")
+            console.log("-------------a.2.-Terminando proceso correctamente ordenado con callbacks-------------")
         });
     });
 }, 2000);
@@ -99,25 +99,25 @@ puede ser un verdadero infierno, además sin querer podemos terminar "harcodeand
 acciones que deberían ser manejadas por una función adicional, están siendo ejecutadas de forma manual.*/
 function saludoCallback_Hell(primerCallback_Hell){                          //Función asíncrona con callback hell.
     setTimeout(function(){                                                  //Temporizador.
-        console.log("\t\t\tQue pedo callback hell 🔥");                     //Tarea a ejecutar de la función.
+        console.log("\t\t\t\tQue pedo callback hell 🔥");                     //Tarea a ejecutar de la función.
         primerCallback_Hell();                                              //Ejecución de callback.
     }, 1000);
 }
 function cuerpoCallback_Hell(callbackHell_Intermedio){                      //Función asíncrona con callback hell.
     setTimeout(function(){                                                  //Temporizador.
-        console.log("\t\t🔥🔥🔥🔥🔥 Infierno desatadooo 🔥🔥🔥🔥🔥");   //Tarea a ejecutar de la función.
+        console.log("\t\t\t🔥🔥🔥🔥🔥 Infierno desatadooo 🔥🔥🔥🔥🔥");   //Tarea a ejecutar de la función.
         callbackHell_Intermedio();                                          //Ejecución de callback.
     }, 1000);
 }
 function despedidaCallback_Hell(ultimoCallback_Hell){                       //Función asíncrona con callback.
     setTimeout(function(){                                                  //Temporizador.
-        console.log("\t\t\t🔥 Bye callback hell 🔥🔥");                     //Tarea a ejecutar de la función.
+        console.log("\t\t\t\t🔥 Bye callback hell 🔥🔥");                     //Tarea a ejecutar de la función.
         ultimoCallback_Hell();                                              //Ejecución de callback.
     }, 1000);
 }
 //Proceso correctamente ordenado con callbacks, se usa un temporizador debido a la ejecución del ejemplo previo.
 setTimeout(function(){
-    console.log("\n\n\n^^^^^^^^^^^^^^^b.1.-Inicializando proceso de CALLBACK HELL 🔥^^^^^^^^^^^^^^")
+    console.log("\n\n\n^^^^^^^^^^^^^^^^^^^^b.1.-Inicializando proceso de CALLBACK HELL 🔥^^^^^^^^^^^^^^^^^^^^")
     saludoCallback_Hell(function(){
         /*Ejecutar 3 veces la misma función de forma manual es harcodear el código y eso está mal hecho, causando
         así que se cree el callback hell.*/
@@ -129,7 +129,7 @@ setTimeout(function(){
                         callback hell, para solucionarlo se debe crear una función adicional que maneje el número de 
                         veces que queremos que se ejecute esta función.*/
                         despedidaCallback_Hell(function(){
-                            console.log("^^^^^^^^^^^^^^^^b.2.-Terminando proceso de CALLBACK HELL 🔥^^^^^^^^^^^^^^^^")
+                            console.log("^^^^^^^^^^^^^^^^^^^^^^b.2.-Terminando proceso de CALLBACK HELL 🔥^^^^^^^^^^^^^^^^^^^^^")
                         });
                     });
                 });
@@ -157,11 +157,11 @@ function solucionCallback_Hell(vecesEjecucion, callbackHell_Solucion){
 }
 //Ejecución de la solución del callback hell.
 setTimeout(function(){
-    console.log("\n\n\n~~~~~~~~~~c.1.-Inicializando proceso correcto de CALLBACK HELL 🔥~~~~~~~~~~")
+    console.log("\n\n\n~~~~~~~~~~~~~~~~c.1.-Inicializando proceso correcto de CALLBACK HELL 🔥~~~~~~~~~~~~~~~")
     saludoCallback_Hell(function(){
         /*Por medio de la función recursiva se puede evitar la creación de callback hells.*/
-        solucionCallback_Hell(2, function(){
-            console.log("~~~~~~~~~~~~~c.2.-Terminando correctamente el CALLBACK HELL 🔥~~~~~~~~~~~~~")
+        solucionCallback_Hell(1, function(){
+            console.log("~~~~~~~~~~~~~~~~~~~c.2.-Terminando correctamente el CALLBACK HELL 🔥~~~~~~~~~~~~~~~~~~")
         })
     });
 }, 12000);
@@ -181,8 +181,8 @@ return y de la clase Promise, que recibe un callback con dos parámetros:
     - reject: Este parámetro del callback que recibe la promesa como parámetro se utiliza cuando la tarea ha sido 
       rechazada porque ha ocurrido una excepción.
 A continuación se utilizará una misma función que se realizó con callbacks pero ahora con promesas:*/
-function holaPromise(nombre, parametro_exito){                          //Función asíncrona con callback.
-    return new Promise(function(resolve, reject){
+function holaPromise(nombre, parametro_exito){                          //Función asíncrona con manejo de errores.
+    return new Promise(function(resolve, reject){                       //Sintaxis de promesa.
         setTimeout(function(){                                          //Temporizador.
             if(parametro_exito == true){                                //Condicional que avalúa si hubo errores.
                 console.log("\t\t\tHola\t" + nombre);                   //Tarea a ejecutar de la función.
@@ -194,28 +194,28 @@ function holaPromise(nombre, parametro_exito){                          //Funci�
         }, 1000);
     });
 }
-function hablarPromise(nombre){
-    return new Promise(function(resolve, reject){
+function hablarPromise(nombre){                                         //Función asíncrona con manejo de errores.
+    return new Promise(function(resolve, reject){                       //Sintaxis de promesa.
         setTimeout(function(){                                          //Temporizador.
             //El condicional que avalúa si hubo errores no debe existir en todas las promesas, solo donde sirva.
-            console.log("\t\t\tBla, bla, bla, bla...");                 //Tarea a ejecutar de la función.
+            console.log("\t\t\t\tBla, bla, bla, bla...");                 //Tarea a ejecutar de la función.
             resolve(nombre);                                            //resolve = Resultado de promesa sin errores.
         }, 1000);
     });
 }
-function adiosPromise(nombreHeredado, parametro_exitoHeredado){         //Función asíncrona con callback.
+function adiosPromise(nombreHeredado){                                  //Función asíncrona con manejo de errores.
     /*Para describir las acciones de las promesas se pueden utilizar arrow functions, que funcionan exactamente 
     igual a las funciones normales, pero con una sintaxis más sencilla:
     -Función normal:
-        function(){
+        function nombreFuncion(){
             //Contenido función.
         }
-    -Arrow Function:
+    -Arrow Function o función anónima:
         () => {
             //Contenido función.
         }
     En las reglas ECMA6 esta es la sintaxis predeterminada para promesas.*/
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {                           //Sintaxis de promesa.
         setTimeout(function(){                                          //Temporizador.
             console.log("\t\t\tAdiós\t" + nombreHeredado);              //Tarea a ejecutar de la función.
             resolve(nombreHeredado);                                    //resolve = Resultado de promesa sin errores.
@@ -229,7 +229,7 @@ setTimeout(function(){
     /*Cabe mencionar que los callbacks y promesas solo pueden devolver un único valor al resolverse o detectar una 
     excepción. Sin embargo, se cuenta con la opción de crear un objeto que contenga múltiples valores como resultado 
     de la promesa o callback, pero esto no siempre funciona.*/
-    holaPromise("di_cer0 = Diego Cervantes", true)  //Aquí se le pasa como parámetro a la función si hay errores o no.
+    holaPromise("di_cer0 = Diego Cervantes", true)  //Se le pasa como parámetro a la función si hay errores o no.
         .then(hablarPromise)
         .then(hablarPromise)
         .then(adiosPromise)
@@ -239,4 +239,93 @@ setTimeout(function(){
         .catch(function(){
             console.error("--d.2.-Ocurrió un error en el proceso con manejo de excepciones por medio de promesas-");
         });
-}, 17000);
+}, 16000);
+
+
+
+
+
+
+//GESTIÓN DE EXCEPCIONES EN FUNCIONES ASÍNCRONAS:
+/*Async Await: Es una forma de forzar que algunas de mis funciones funcionen de forma síncrona una tras la otra, 
+esto se utiliza más que nada cuando una operación no se puede realizar sin antes haber acabado otra. Aunque en 
+realidad la instrucción Async/Await no convierte literalmente la función en síncrona, simplemente hace que esta 
+retorne una promesa. Esto significa que dentro de una función marcada como async, se puede usar la palabra clave 
+await para esperar la resolución de una promesa, logrando así que una función asíncrona funcione como síncrona 
+y a nivel técnico cabe mencionar que esto no bloqueará la ejecución del hilo principal (monohilo).
+Para aplicar la sintaxis de async/await se siguen los siguientes pasos: 
+    - Antes de declarar las promesas que se quiera volver síncronas, se utiliza la palabra reservada async.
+    - Luego cuando la quiera utilizar debo crear otra función asíncrona que ejecute todas mis funciones asíncronas.
+    - Dentro de esa última función asíncrona declaro a través de la instrucción await todas las funciones async en 
+      el órden que quiera que se ejecuten.
+    - Finalmente utilizo la función asíncrona donde se estén ejecutando las demás, logrando que se corran en ese 
+      órden específico como si fueran síncronas.
+A continuación, se demuestra el uso de las funciones async/await con un ejemplo:*/
+async function holaPromiseAsyncAwait(nombre, parametro_exito){          //Función "síncrona" (async/await).
+    return new Promise(function(resolve, reject){                       //Sintaxis de promesa.
+        setTimeout(function(){                                          //Temporizador.
+            if(parametro_exito == true){                                //Condicional que avalúa si hubo errores.
+                console.log("\t\t\tHola\t" + nombre);                   //Tarea a ejecutar de la función.
+                resolve(nombre);                                        //resolve = Resultado de promesa sin errores.
+            } else{
+                console.log("\t\t\tHouston, empezamos con problemas...");//Tarea de la función si hubo excepciones.
+                reject(nombre);                                         //reject = Resultado de promesa con errores.
+            }
+        }, 1000);
+    });
+}
+async function hablarPromiseAsyncAwait(nombre){                         //Función "síncrona" (async/await).
+    return new Promise(function(resolve, reject){                       //Sintaxis de promesa.
+        setTimeout(function(){                                          //Temporizador.
+            //El condicional que avalúa si hubo errores no debe existir en todas las promesas, solo donde sirva.
+            console.log("\t\t\t\tBla, bla, bla, bla...");                 //Tarea a ejecutar de la función.
+            resolve(nombre);                                            //resolve = Resultado de promesa sin errores.
+        }, 1000);
+    });
+}
+async function adiosPromiseAsyncAwait(nombreHeredado){                  //Función "síncrona" (async/await).
+    return new Promise((resolve, reject) => {                           //Sintaxis de promesa.
+        setTimeout(function(){                                          //Temporizador.
+            console.log("\t\t\tAdiós\t" + nombreHeredado);              //Tarea a ejecutar de la función.
+            resolve(nombreHeredado);                                    //resolve = Resultado de promesa sin errores.
+        }, 1000);
+    });
+}
+/*Proceso hecho con async/await promises para forzar que funciones asíncronas funcionen como síncronas, siguiendo 
+cierto órden, se usa un temporizador setTimeout() debido a la ejecución de los ejemplos previos.*/
+setTimeout(function(){
+    //Función asíncrona que ejecutará todas mis otras funciones async.
+    async function ejecutarAsync(){
+        /*Dentro de la función asíncrona que ejecuta las demás declaro a través de la instrucción await el órden en 
+        el que quiera que se ejecuten.
+        Cabe mencionar que cuando se devuelve un reject en la promesa dentro de una función async/await, se genera 
+        una excepción que se propaga al código y lo crashea, por lo cual, si se busca que ese error sea manejado, se 
+        debe crear una estructura de try/catch en la función async que ejecuta todas las funciones async para que ese 
+        error sea manejado.*/
+        try{
+            /*Dentro del try es donde se colocará el órden de la ejecución del código si todo sale bien, osea cuando 
+            la promesa devuelva el resultado de resolve. 
+            Además, es importante saber que lo que devuelve la promesa se puede almacenar en una variable, manejando 
+            así de forma más clara los parámetros que se comparten entre funciones, en vez de estar adivinando como 
+            se hacía ese intercambio con los callbacks y promesas, donde ese proceso es medio rebuscado.*/
+            let nombreAsyncAwait = await holaPromiseAsyncAwait("di_cer0 = MechaGod", true);
+            await hablarPromiseAsyncAwait();
+            /*Si por alguna razón queremos que una de estas funciones se ejecute en paralelo a la ejecución 
+            secuencial de las demás, simplemente no le añadimos la instrucción await, pero lo que si hará es respetar
+            el órden indicado aquí, en este caso, el segundo hablar, se ejecutará al mismo tiempo que el tercero por 
+            la posición en el código donde se encuentra esta instrucción sin await.*/
+            hablarPromiseAsyncAwait();          
+            await hablarPromiseAsyncAwait();
+            await adiosPromiseAsyncAwait(nombreAsyncAwait);
+            console.log("-------e.3.-Terminando proceso sin excepciones detectadas por medio de promesas-------");
+        }catch (error){
+            //Dentro del catch es donde se manejará la excepción cuando la promesa devuelva un reject.
+            console.error("Ocurrió un error debido al estado de la bandera al llamar la función: ", error);
+        }
+        
+    }
+
+    console.log("\n\n\n------e.1.-Inicializando proceso con funciones async/await por medio de promesas------");
+    ejecutarAsync();
+    console.log("---------e.2.-Tarea asíncrona cualquiera para demostrar el órden de ejecución---------");
+}, 21000);
